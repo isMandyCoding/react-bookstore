@@ -1,28 +1,44 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import React, { Component } from 'react';  
+import SearchBar from './components/SearchBar'
+import BookList from './components/BookList'
+import CartList from './components/CartList'
+import Spinner from './components/Spinner'
+
 
 class App extends Component {
+  
+  state = {
+    books: [],
+    fetchingBooks: true,
+  }
+
+  async componentDidMount() {
+    const response = await fetch("http://localhost:8082/api/books")
+    const json = await response.json()
+    this.setState({
+      ...this.state,
+      books: json,
+    fetchingBooks: false,
+    })
+  }
+
   render() {
+    console.log(this.state)
+    // const {books} = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <SearchBar />
+
+        {this.state.fetchingBooks ? 
+          <Spinner /> :
+          <BookList  books={this.state.fetchingBooks ? this.state.books : null} />
+        }        
+        <CartList />
       </div>
     );
   }
 }
+
 
 export default App;
