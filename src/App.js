@@ -4,6 +4,7 @@ import SearchBar from './components/SearchBar'
 import BookList from './components/BookList'
 import CartList from './components/CartList'
 import Spinner from './components/Spinner'
+import { Container } from 'reactstrap';
 
 
 class App extends Component {
@@ -28,13 +29,16 @@ class App extends Component {
     // const {books} = this.state
     return (
       <div className="App">
+
+        <Container >
         <SearchBar />
 
         {this.state.fetchingBooks ? 
           <Spinner /> :
-          <BookList  books={this.state.fetchingBooks ? this.state.books : null} />
+          <BookList  books={this.state.books} />
         }        
         <CartList />
+        </Container>
       </div>
     );
   }
