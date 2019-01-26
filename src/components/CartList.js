@@ -14,7 +14,7 @@ class CartList extends Component {
                 <ListGroup>
                 {mapperCartItems}
                 </ListGroup>               
-                <CartTotal />
+                <CartTotal totalPrice={this.props.totalPrice} />
             </div>
         )
     }

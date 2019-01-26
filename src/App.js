@@ -25,7 +25,11 @@ class App extends Component {
   }
 
   //data functions
-  cartList = () => this.state.books.filter(book => book.inCart)
+  cartList = () => this.state.books.filter(book => book.inCart);
+
+  totalPrice = () => this.cartList().reduce((acc, item) => {
+    return item.price + acc
+  }, 0)
 
   //event functions
   addToCart = id => {
@@ -66,7 +70,7 @@ class App extends Component {
           <Col sm="4">
           {this.state.fetchingBooks ? 
               <Spinner /> :
-              <CartList  cartList={this.cartList()} />
+              <CartList  cartList={this.cartList()} totalPrice={this.totalPrice()} />
             }
           </Col>
 
