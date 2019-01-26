@@ -4,7 +4,7 @@ import SearchBar from './components/SearchBar'
 import BookList from './components/BookList'
 import CartList from './components/CartList'
 import Spinner from './components/Spinner'
-import { Container } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 
 class App extends Component {
@@ -24,20 +24,54 @@ class App extends Component {
     })
   }
 
+  //data functions
+  cartList = () => this.state.books.filter(book => book.inCart)
+
+  //event functions
+  addToCart = id => {
+    console.log("addToCart Fired!", 'bookid: ', id)
+    this.setState(prevState => {
+      return {
+        books: prevState.books.reduce((acc, book) => {
+          if (book.id == id) {
+            return [
+              ...acc,
+              {
+                ...book,
+                inCart: true
+              }
+            ];
+          }
+          return [...acc, book];
+        }, [])
+      }
+    })
+    
+  } 
+
   render() {
-    console.log(this.state)
-    // const {books} = this.state
+    console.log(this.cartList())
     return (
       <div className="App">
 
         <Container >
         <SearchBar />
+        <Row>
+          <Col sm="8">
+            {this.state.fetchingBooks ? 
+              <Spinner /> :
+              <BookList  books={this.state.books} addToCart={this.addToCart} />
+            }
+          </Col>
+          <Col sm="4">
+          {this.state.fetchingBooks ? 
+              <Spinner /> :
+              <CartList  cartList={this.cartList()} />
+            }
+          </Col>
 
-        {this.state.fetchingBooks ? 
-          <Spinner /> :
-          <BookList  books={this.state.books} />
-        }        
-        <CartList />
+        </Row>        
+        
         </Container>
       </div>
     );

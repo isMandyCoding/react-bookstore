@@ -5,7 +5,7 @@ import Spinner from './Spinner'
 class BookList extends Component {
     render () {
             const mappedBooks = this.props.books.map(book => {
-                return <Book book={book} key={book.id}/>
+                return <Book book={book} key={book.id} addToCart={this.props.addToCart} bookId={book.id} />
             })
 
         
