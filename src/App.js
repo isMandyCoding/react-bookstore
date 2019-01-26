@@ -33,7 +33,6 @@ class App extends Component {
 
   //event functions
   addToCart = id => {
-    console.log("addToCart Fired!", 'bookid: ', id)
     this.setState(prevState => {
       return {
         books: prevState.books.reduce((acc, book) => {
@@ -54,7 +53,6 @@ class App extends Component {
   } 
 
   render() {
-    console.log(this.cartList())
     return (
       <div className="App">
 
@@ -68,10 +66,12 @@ class App extends Component {
             }
           </Col>
           <Col sm="4">
-          {this.state.fetchingBooks ? 
-              <Spinner /> :
-              <CartList  cartList={this.cartList()} totalPrice={this.totalPrice()} />
-            }
+            <Row className="sticky-cart">
+              {this.state.fetchingBooks ? 
+                  <Spinner /> :
+                  <CartList className="sticky-cart" cartList={this.cartList()} totalPrice={this.totalPrice()} />
+                }
+            </Row>
           </Col>
 
         </Row>        

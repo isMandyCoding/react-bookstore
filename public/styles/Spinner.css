@@ -11,3 +11,11 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .sticky-cart {
+    min-height: 300px;
+    max-height: auto;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
