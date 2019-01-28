@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';  
-import SearchBar from './components/SearchBar'
+// import SearchBar from './components/SearchBar'
 import BookList from './components/BookList'
 import CartList from './components/CartList'
 import Spinner from './components/Spinner'
@@ -20,7 +20,7 @@ class App extends Component {
     this.setState({
       ...this.state,
       books: json,
-    fetchingBooks: false,
+      fetchingBooks: false,
     })
   }
 
@@ -30,6 +30,8 @@ class App extends Component {
   totalPrice = () => this.cartList().reduce((acc, item) => {
     return item.price + acc
   }, 0)
+
+  
 
   //event functions
   addToCart = id => {
@@ -48,16 +50,28 @@ class App extends Component {
           return [...acc, book];
         }, [])
       }
-    })
-    
+    })    
   } 
+
+  // filteredBooks = (filterType, filterString = "") => {    
+  //   if(filterType === "title") {
+  //     console.log(this.state.books.filter(book => book.title.toLowerCase().includes(filterString.toLowerCase())))
+  //     return this.state.books.filter(book => book.title.toLowerCase().includes(filterString.toLowerCase()))
+  //   } else if(filterType === "author") {
+  //     return this.state.books.filter(book => book.author.toLowerCase().includes(filterString.toLowerCase()))
+  //   } else {
+  //     return this.state.books
+  //   }    
+  // }
 
   render() {
     return (
       <div className="App">
 
         <Container >
-        <SearchBar />
+            {/* <SearchBar filteredBooks={this.filteredBooks} />             */}
+
+        
         <Row>
           <Col sm="8">
             {this.state.fetchingBooks ? 
@@ -68,8 +82,8 @@ class App extends Component {
           <Col sm="4">
             <Row className="sticky-cart">
               {this.state.fetchingBooks ? 
-                  <Spinner /> :
-                  <CartList className="sticky-cart" cartList={this.cartList()} totalPrice={this.totalPrice()} />
+                  null :
+                  <CartList cartList={this.cartList()} totalPrice={this.totalPrice()} />
                 }
             </Row>
           </Col>
