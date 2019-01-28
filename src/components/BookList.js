@@ -18,21 +18,16 @@ class BookList extends Component {
       }
 
     render () {
-            // const mappedBooks = this.props.books.map(book => {
-            //     return <Book book={book} key={book.id} addToCart={this.props.addToCart} bookId={book.id} />
-            // })
 
-            let mappedBooks = this.props.books
-            .filter(book => book[this.state.type].toLowerCase().includes(this.state.filterPhrase.toLowerCase()))
-            .map(book => <Book key={book.id} book={book} addToCart={this.props.addToCart} bookId={book.id} />)
-
-        
+        let mappedBooks = this.props.books
+        .filter(book => book[this.state.type].toLowerCase().includes(this.state.filterPhrase.toLowerCase()))
+        .map(book => <Book key={book.id} book={book} addToCart={this.props.addToCart} bookId={book.id} />)        
         
         return (
             <div>
             {/* Search form */}
             <Form>
-                    <Row>
+                <Row>
                     <Col>
                         <FormGroup>
                             <Label for="search">Search</Label>

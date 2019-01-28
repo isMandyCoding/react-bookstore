@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';  
-// import SearchBar from './components/SearchBar'
 import BookList from './components/BookList'
 import CartList from './components/CartList'
 import Spinner from './components/Spinner'
@@ -29,9 +28,7 @@ class App extends Component {
 
   totalPrice = () => this.cartList().reduce((acc, item) => {
     return item.price + acc
-  }, 0)
-
-  
+  }, 0)  
 
   //event functions
   addToCart = id => {
@@ -53,25 +50,11 @@ class App extends Component {
     })    
   } 
 
-  // filteredBooks = (filterType, filterString = "") => {    
-  //   if(filterType === "title") {
-  //     console.log(this.state.books.filter(book => book.title.toLowerCase().includes(filterString.toLowerCase())))
-  //     return this.state.books.filter(book => book.title.toLowerCase().includes(filterString.toLowerCase()))
-  //   } else if(filterType === "author") {
-  //     return this.state.books.filter(book => book.author.toLowerCase().includes(filterString.toLowerCase()))
-  //   } else {
-  //     return this.state.books
-  //   }    
-  // }
-
   render() {
     return (
       <div className="App">
 
-        <Container >
-            {/* <SearchBar filteredBooks={this.filteredBooks} />             */}
-
-        
+        <Container >        
         <Row>
           <Col sm="8">
             {this.state.fetchingBooks ? 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CartItem from './CartItem'
-import CartTotal from './CartTotal'
-import { Container, Row, Col, ListGroup, ListGroupItem, Badge } from 'reactstrap';
+import CartTotal from './CartTotal';
+import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 
 class CartList extends Component {
     render () {
