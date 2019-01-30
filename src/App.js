@@ -13,17 +13,36 @@ class App extends Component {
     fetchingBooks: true,
   }
 
-  async componentDidMount() {
-    const response = await fetch("http://localhost:8082/api/books")
-    const json = await response.json()
-    this.setState({
-      ...this.state,
-      books: json,
-      fetchingBooks: false,
+  //do you have to use the async/await syntax with React
+  // async componentDidMount() {
+  //   try {
+  //     const response = await fetch("http://localhost:8082/api/books")
+  //     const json = await response.json()
+  //     this.setState({
+  //       ...this.state,
+  //       books: json,
+  //       fetchingBooks: false,
+  //     })
+  //   } catch(e) {
+  //     alert(e)
+  //   } 
+  // }
+
+  //or you could: 
+  componentDidMount = () => {
+    fetch("http://localhost:8082/api/books")
+    .then(res => res.json())
+    .then(json => {
+      this.setState({
+        ...this.state,
+        books: json,
+        fetchingBooks: false,
+      })
     })
+    .catch(e => alert(e))
   }
 
-  //data functions
+  //computed properties
   cartList = () => this.state.books.filter(book => book.inCart);
 
   totalPrice = () => this.cartList().reduce((acc, item) => {
